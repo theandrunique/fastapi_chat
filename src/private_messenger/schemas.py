@@ -15,6 +15,8 @@ class PrivateChat(BaseModel):
     id: str
     messages_count: int = 0
     type: ChatType
+    last_message: Message | None
+    member_id: str | None = None
 
 
 class PrivateChatsCollection(BaseModel):
