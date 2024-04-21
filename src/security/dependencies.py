@@ -6,6 +6,7 @@ from src.security.utils import decode_payload
 
 
 oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="token",
     auto_error=False,
 )
 
