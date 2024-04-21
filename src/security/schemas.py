@@ -5,6 +5,6 @@ from pydantic import BaseModel
 
 
 class TokenPayload(BaseModel):
-    sub: int
+    sub: str
     jti: UUID
     exp: datetime.datetime
