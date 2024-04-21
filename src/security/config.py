@@ -9,7 +9,7 @@ class Settings(BaseSettings):
         case_sensitive=True,
     )
 
-    SECRET_KEY: str = "secret_key"
+    SECRET_KEY: str
     ALGORITHM: str = "HS256"
 
 
