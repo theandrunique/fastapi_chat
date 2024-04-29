@@ -35,3 +35,5 @@ class PrivateChat(BaseModel):
 class UserChat(BaseModel):
     chat_id: str
     type: ChatType
+    member_id: str | None = None
+

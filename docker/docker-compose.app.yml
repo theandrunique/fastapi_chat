@@ -1,0 +1,16 @@
+name: "fastapi-chat"
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    environment:
+      MONGO_USERNAME: ${MONGO_USERNAME:?}
+      MONGO_PASSWORD: ${MONGO_PASSWORD:?}
+      MONGO_HOST: ${MONGO_HOST:-mongo}
+      MONGO_PORT: ${MONGO_PORT:-27017}
+      MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME:-fastapi-chat}
+      KAFKA_BROKER_URL: ${KAFKA_BROKER_URL:?}
+      SECRET_KEY: ${SECRET_KEY:?}
+

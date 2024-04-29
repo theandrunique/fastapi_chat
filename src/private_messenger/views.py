@@ -25,8 +25,8 @@ async def create_private_chat(user_id: str, user: UserAuthorization):
     user_2 = UserChatsRepository(to_id)
     chat_id = get_chat_id(from_id=from_id, to_id=to_id)
 
-    await user_1.add(chat_id=chat_id, type=ChatType.PRIVATE)
-    await user_2.add(chat_id=chat_id, type=ChatType.PRIVATE)
+    await user_1.add(chat_id=chat_id, type=ChatType.PRIVATE, member_id=to_id)
+    await user_2.add(chat_id=chat_id, type=ChatType.PRIVATE, member_id=from_id)
     
 
 @router.post("/{user_id}/send-message")
@@ -67,6 +67,8 @@ async def get_chats(user: UserAuthorization):
             id=item.chat_id,
             type=item.type,
             messages_count=await collection.count_documents({}),
+            last_message=await collection.find_one({}, sort=[("message_id", -1)]),
+            member_id=item.member_id,
         )
         chats.append(chat)
 

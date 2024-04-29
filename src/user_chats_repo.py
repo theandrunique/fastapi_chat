@@ -16,7 +16,7 @@ class UserChatsRepository(Repository):
         """
         self.collection = db[f"user_{user_id}_chats"]
     
-    async def add(self, chat_id: str, type: ChatType) -> None:
+    async def add(self, chat_id: str, type: ChatType, member_id: str = None) -> None:
         """
         Inserts a new chat ID into the collection.
 
@@ -29,6 +29,7 @@ class UserChatsRepository(Repository):
         await self.collection.insert_one({
             "chat_id": chat_id,
             "type": type.value,
+            "member_id": member_id,
         })
     
     async def get(self, chat_id: str) -> UserChat | None:
