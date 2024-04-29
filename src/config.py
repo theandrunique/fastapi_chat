@@ -12,9 +12,6 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "FastAPI Chat"
     SERVER_HOST: str = "http://localhost"
 
-    MONGO_URL: str
-    MONGO_DATABASE_NAME: str
-
     KAFKA_BROKER_URL: str
 
 

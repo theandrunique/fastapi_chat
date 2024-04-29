@@ -4,11 +4,12 @@ from fastapi import FastAPI
 
 from typing import Any
 
-from src.mongo import test_connection
+from src.mongo import ping_mongo, mongodb_info
 
 
 async def on_startup(app: FastAPI) -> None:
-    await test_connection()
+    await ping_mongo()
+    await mongodb_info()
 
 
 async def on_shutdown(app: FastAPI) -> None: ...
