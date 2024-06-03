@@ -9,7 +9,9 @@ app = FastAPI(
 )
 app.include_router(ws_router)
 app.include_router(chats_router, prefix="/chats", tags=["chats"])
-app.include_router(messages_router, prefix="/chats/{chat_id}/messages", tags=["messages"])
+app.include_router(
+    messages_router, prefix="/chats/{chat_id}/messages", tags=["messages"]
+)
 
 
 @app.get("/")

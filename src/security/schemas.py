@@ -11,4 +11,3 @@ class TokenPayload(BaseModel):
     aud: str
     exp: datetime
     iss: str
-    
