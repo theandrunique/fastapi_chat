@@ -27,6 +27,7 @@ class Chat(BaseModel):
     type: ChatType
 
 
+
 class ChatCreate(BaseModel):
     name: str | None
 

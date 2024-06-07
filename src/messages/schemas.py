@@ -15,3 +15,4 @@ class Message(BaseModel):
 class MessageCreate(BaseModel):
     text: str
     attachments: list[str] | None = None
+
