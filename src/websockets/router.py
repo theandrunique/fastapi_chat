@@ -5,7 +5,6 @@ from fastapi.websockets import WebSocket, WebSocketDisconnect
 from fastapi.exceptions import WebSocketException
 from src.logger import logger
 from src.config import settings
-from src.messages.schemas import Message
 from src.schemas import NewMessage
 from src.security.utils import decode_payload
 from src.websockets.utils import get_topic_name
