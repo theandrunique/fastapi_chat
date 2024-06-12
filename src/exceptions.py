@@ -17,9 +17,9 @@ class ChatNotFound(HTTPException):
         )
 
 
-class PrivateChatNotFound(HTTPException):
+class UserNotFound(HTTPException):
     def __init__(self, user_id: str) -> None:
         super().__init__(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Private chat with user {user_id} not found",
+            detail=f"User {user_id} not found",
         )

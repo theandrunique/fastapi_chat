@@ -4,7 +4,7 @@ from fastapi import Depends, params
 from fastapi.security import OAuth2PasswordBearer
 
 from src.container import container
-from src.exceptions import ChatNotFound, InvalidToken, PrivateChatNotFound
+from src.exceptions import ChatNotFound, InvalidToken, UserNotFound
 from src.models.chat import Chat
 from src.models.user import User
 from src.schemas.object_id import PyObjectId
@@ -68,12 +68,14 @@ ExistedGroupChat = Annotated[Chat, Depends(get_existed_group_chat)]
 
 
 async def get_existed_private_chat(
-    user_id: UUID, user: UserAuthorization, chats_service=Provide(Container.ChatsService)
-) -> Chat:
-    chat = await chats_service.get_private_chat(user_id, user.id)
-    if not chat:
-        raise PrivateChatNotFound(str(user_id))
-    return chat
+    user_id: UUID, user: UserAuthorization, chats_service=Provide(Container.ChatsService),
+    users_service = Provide(Container.UsersService),
+) -> tuple[User, Chat]:
+    receiver = await users_service.get(user_id)
+    if not receiver:
+        raise UserNotFound(str(user_id))
+    chat = await chats_service.get_private_chat(receiver.id, user.id)
+    return receiver, chat
 
 
-ExistedPrivateChat = Annotated[Chat, Depends(get_existed_private_chat)]
+ExistedPrivateChat = Annotated[tuple[User, Chat], Depends(get_existed_private_chat)]

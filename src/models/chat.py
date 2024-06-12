@@ -15,12 +15,13 @@ class ChatType(str, Enum):
 
 
 class Chat(BaseModel):
-    id: PyObjectId = Field(validation_alias=AliasChoices("_id", "id"))
+    id: UUID | PyObjectId = Field(validation_alias=AliasChoices("_id", "id"))
     name: str | None = None
     created_at: datetime
     creator_id: UUID | None = None
     members: list[UUID]
     admins: list[UUID]
+    image_url: str | None = None
     message_count: int
     last_message: Message | None = None
     type: ChatType

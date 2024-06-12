@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from src.models.chat import Chat
+from src.models.chat import Chat, ChatType
 from src.models.message import Message
 from src.repositories.base.base_chats import ChatsRepository
 from src.schemas.chats import ChatFactory
@@ -33,15 +33,21 @@ class ImplChatsService(ChatsService):
         result = await self.repository.get_private_chat(user_1, user_2)
         if result:
             return Chat(**result)
-        return None
+        else:
+            chat_factory = ChatFactory(
+                type=ChatType.PRIVATE,
+                members=[user_1, user_2],
+            )
+            return await self.add(chat_factory)
 
     async def update_last_message(
         self, chat_id: PyObjectId, new_message: Message
-    ) -> None:
-        await self.repository.update(
+    ) -> Chat:
+        chat_dict = await self.repository.update(
             chat_id,
             {
                 "last_message": new_message.model_dump(),
                 "message_count": new_message.id + 1,
             },
         )
+        return Chat(**chat_dict)

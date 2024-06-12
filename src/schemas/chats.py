@@ -18,6 +18,7 @@ class ChatFactory:
     creator_id: UUID | None = None
     type: ChatType
     members: list[UUID]
+    image_url: str | None = None
     admins: list[UUID] = field(default_factory=lambda: list())
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     message_count: int = 0

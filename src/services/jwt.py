@@ -27,7 +27,7 @@ class PyJWTService(JWTService):
                 key=signing_key,
                 algorithms=[self.algorithm],
                 audience=self.client_id,
-                issuer="http://localhost:8000",
+                issuer=self.auth_server_url,
             )
             return TokenPayload(**payload_dict)
         except (jwt.PyJWTError, ValidationError):

@@ -20,5 +20,3 @@ class ImplProducerService(ABC):
                     topic=get_topic_name(recipient),
                     value=message.model_dump_json().encode(),
                 )
-
-        await self.producer.stop()
